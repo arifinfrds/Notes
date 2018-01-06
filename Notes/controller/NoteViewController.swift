@@ -12,13 +12,13 @@ import CoreData
 class NoteViewController: UIViewController {
     
     
-     // MARK: - Properties
+    // MARK: - Properties
     
     @IBOutlet var noteTableView: UITableView!
     
     var appDelegate: AppDelegate!
     var managedObjectContext: NSManagedObjectContext!
-
+    
     var notes = [Note]()
     
     
@@ -34,12 +34,24 @@ class NoteViewController: UIViewController {
         setupViews()
         
         noteTableView.dataSource = self
+        noteTableView.delegate = self
         noteTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
     
     // MARK: - Private API's
     
+    private func setupViews() {
+        // setup navigation bar
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = Resources.Color().applicationBaseColor
+        
+        // setup cell
+        let nib = UINib(nibName: "NoteCell", bundle: nil)
+        noteTableView.register(nib, forCellReuseIdentifier: "note_cell")
+    }
+    
+    // CoreData fetch request
     private func updateUI() {
         // core data stuff
         appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -51,18 +63,23 @@ class NoteViewController: UIViewController {
             try notes = managedObjectContext.fetch(noteRequest)
             noteTableView.reloadData()
         } catch {
-            print("could not save data : \(error.localizedDescription)")
+            print("updateUI(): could not save data : \(error.localizedDescription)")
         }
     }
     
-    private func setupViews() {
-        // setup navigation bar
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = Resources.Color().applicationBaseColor
+    // CoreData delete
+    private func deleteNoteFromCoreData(at indexPath: IndexPath) {
+        // core data stuff
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        managedObjectContext = appDelegate.persistentContainer.viewContext
+        let note = notes[indexPath.row]
+        managedObjectContext.delete(note)
         
-        // setup cell
-        let nib = UINib(nibName: "NoteCell", bundle: nil)
-        noteTableView.register(nib, forCellReuseIdentifier: "note_cell")
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("deleteNoteFromCoreData(): could not save data : \(error.localizedDescription)")
+        }
     }
     
 }
@@ -81,4 +98,31 @@ extension NoteViewController: UITableViewDataSource {
         cell.dataSource = notes[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            deleteNoteFromCoreData(at: indexPath)
+            notes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+    }
 }
+
+
+// MARK: - UITableViewDelegate
+
+extension NoteViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+}
+
+
+
+
+
+
+
