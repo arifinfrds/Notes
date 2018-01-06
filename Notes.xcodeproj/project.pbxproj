@@ -12,6 +12,7 @@
 		92179A5D2000965100CCC523 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92179A5C2000965100CCC523 /* Default-568h@2x.png */; };
 		92179A602000980100CCC523 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92179A5E2000980100CCC523 /* NoteCell.swift */; };
 		92179A612000980100CCC523 /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92179A5F2000980100CCC523 /* NoteCell.xib */; };
+		921803C12000A56C009A4585 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921803C02000A56C009A4585 /* AddNoteViewController.swift */; };
 		929A064C20008B6B004A1845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A064B20008B6B004A1845 /* AppDelegate.swift */; };
 		929A065120008B6B004A1845 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929A064F20008B6B004A1845 /* Main.storyboard */; };
 		929A065420008B6B004A1845 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 929A065220008B6B004A1845 /* Notes.xcdatamodeld */; };
@@ -44,6 +45,7 @@
 		92179A5C2000965100CCC523 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		92179A5E2000980100CCC523 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		92179A5F2000980100CCC523 /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
+		921803C02000A56C009A4585 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		929A064820008B6B004A1845 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		929A064B20008B6B004A1845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		929A065020008B6B004A1845 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				92179A56200093B300CCC523 /* NoteViewController.swift */,
+				921803C02000A56C009A4585 /* AddNoteViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				929A065420008B6B004A1845 /* Notes.xcdatamodeld in Sources */,
 				92179A592000956200CCC523 /* Resources.swift in Sources */,
+				921803C12000A56C009A4585 /* AddNoteViewController.swift in Sources */,
 				92179A602000980100CCC523 /* NoteCell.swift in Sources */,
 				92179A57200093B300CCC523 /* NoteViewController.swift in Sources */,
 				929A064C20008B6B004A1845 /* AppDelegate.swift in Sources */,

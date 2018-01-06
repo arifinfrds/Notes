@@ -31,6 +31,10 @@ class NoteViewController: UIViewController {
         noteTableView.register(nib, forCellReuseIdentifier: "note_cell")
     }
     
+    @IBAction func addNote(_ sender: Any) {
+        
+    }
+    
 }
 
 extension NoteViewController: UITableViewDataSource {
