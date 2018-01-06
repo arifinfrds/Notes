@@ -13,6 +13,17 @@ class NoteCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
+    var dataSource: Note? {
+        didSet {
+            updateUI()
+        }
+    }
+    
+    private func updateUI() {
+        titleLabel.text = dataSource?.title
+        contentLabel.text = dataSource?.content
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

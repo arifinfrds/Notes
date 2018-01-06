@@ -22,7 +22,6 @@
                     <navigationItem key="navigationItem" title="Notes" id="X51-ZJ-BgR">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="I7z-lY-VQ0">
                             <connections>
-                                <action selector="addNote:" destination="6CI-Tp-fue" id="ARx-Nr-uZV"/>
                                 <segue destination="gCK-EP-Nbd" kind="show" id="hEL-QW-CxU"/>
                             </connections>
                         </barButtonItem>
@@ -75,15 +74,15 @@
                                 <action selector="cancel:" destination="XnA-Lg-mte" id="iwh-n8-fcG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="YyU-QD-Y5a">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="YyU-QD-Y5a">
                             <connections>
                                 <action selector="save:" destination="XnA-Lg-mte" id="4x7-Pb-y2H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="contentLabel" destination="IOj-ze-KoM" id="1Zr-f2-2sZ"/>
-                        <outlet property="titleLabel" destination="vWk-Q1-Rt6" id="dWz-gX-z3d"/>
+                        <outlet property="contentTextField" destination="IOj-ze-KoM" id="1Zr-f2-2sZ"/>
+                        <outlet property="titleTextField" destination="vWk-Q1-Rt6" id="dWz-gX-z3d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ah-qH-TPg" userLabel="First Responder" sceneMemberID="firstResponder"/>
