@@ -36,8 +36,9 @@ class NoteViewController: UIViewController {
         noteTableView.dataSource = self
         noteTableView.delegate = self
         noteTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
     }
-    
+ 
     
     // MARK: - Private API's
     
@@ -82,6 +83,21 @@ class NoteViewController: UIViewController {
         }
     }
     
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue_edit_note_view_controller" {
+            if let navVC = segue.destination as? UINavigationController {
+                let editNoteVC = navVC.topViewController as! EditNoteViewController
+                
+                if let selectedIndexPath = noteTableView.indexPathForSelectedRow {
+                    editNoteVC.noteId = notes[selectedIndexPath.row].id
+                }
+            }
+        }
+    }
+    
 }
 
 
@@ -117,6 +133,10 @@ extension NoteViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "segue_edit_note_view_controller", sender: indexPath)
     }
 }
 
