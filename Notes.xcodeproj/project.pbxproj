@@ -20,6 +20,7 @@
 		929A065920008B6B004A1845 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929A065720008B6B004A1845 /* LaunchScreen.storyboard */; };
 		929A066420008B6C004A1845 /* NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A066320008B6C004A1845 /* NotesTests.swift */; };
 		929A066F20008B6C004A1845 /* NotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A066E20008B6C004A1845 /* NotesUITests.swift */; };
+		92C262D92002125600D00818 /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C262D82002125600D00818 /* EditNoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		929A066A20008B6C004A1845 /* NotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		929A066E20008B6C004A1845 /* NotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUITests.swift; sourceTree = "<group>"; };
 		929A067020008B6C004A1845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92C262D82002125600D00818 /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				92179A56200093B300CCC523 /* NoteViewController.swift */,
 				921803C02000A56C009A4585 /* AddNoteViewController.swift */,
+				92C262D82002125600D00818 /* EditNoteViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				92179A602000980100CCC523 /* NoteCell.swift in Sources */,
 				92179A57200093B300CCC523 /* NoteViewController.swift in Sources */,
 				929A064C20008B6B004A1845 /* AppDelegate.swift in Sources */,
+				92C262D92002125600D00818 /* EditNoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
