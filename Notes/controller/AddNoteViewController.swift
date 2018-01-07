@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class AddNoteViewController: UIViewController {
-
+    
     
     // MARK: - Properties
     
@@ -52,9 +52,9 @@ class AddNoteViewController: UIViewController {
         let note = Note(context: managedObjectContext)
         note.title = title
         note.content = content
-
+        
         note.id = randomString(length: 25)
-
+        
         do {
             try managedObjectContext.save()
             dismiss(animated: true, completion: nil)
@@ -71,13 +71,6 @@ class AddNoteViewController: UIViewController {
         // setup navigation bar
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = Resources.Color().applicationBaseColor
-    }
-    
-    private func showAlertController(with title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(OKAction)
-        present(alertController, animated: true, completion: nil)
     }
     
     private func randomString(length: Int) -> String {
