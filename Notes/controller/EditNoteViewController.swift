@@ -39,13 +39,42 @@ class EditNoteViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-
+    
     @IBAction func done(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        updateNoteDatabase()
     }
     
     
     // MARK: - Private API's
+    
+    func updateNoteDatabase() {
+        if let noteId = noteId {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managedObjectContext = appDelegate.persistentContainer.viewContext
+            
+            guard
+                let newTitle = titleTextField.text,
+                let newContent = contentTextField.text else {
+                    return
+            }
+            
+            // FIXME: - Gagal, karena yang terupdate semua data. Harusnya yang dipilih aja.
+            guard let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedObjectContext) else { return }
+            let batchUpdateRequest = NSBatchUpdateRequest(entity: entity)
+            batchUpdateRequest.propertiesToUpdate = [
+                "id" : noteId,
+                "title" : newTitle,
+                "content" : newContent
+            ]
+            do {
+                try managedObjectContext.execute(batchUpdateRequest)
+                dismiss(animated: true, completion: nil)
+            } catch {
+                print("could not load data : \(error.localizedDescription)")
+            }
+        }
+    }
     
     private func setupViews() {
         // setup navigation bar
@@ -83,5 +112,5 @@ class EditNoteViewController: UIViewController {
         }
         
     }
-
+    
 }
