@@ -58,18 +58,24 @@ class EditNoteViewController: UIViewController {
                 let newContent = contentTextField.text else {
                     return
             }
+            // request
+            let fetchNoteRequest: NSFetchRequest<Note> = Note.fetchRequest()
             
-            // FIXME: - Gagal, karena yang terupdate semua data. Harusnya yang dipilih aja.
             guard let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedObjectContext) else { return }
-            let batchUpdateRequest = NSBatchUpdateRequest(entity: entity)
-            batchUpdateRequest.propertiesToUpdate = [
-                "id" : noteId,
-                "title" : newTitle,
-                "content" : newContent
-            ]
+            fetchNoteRequest.entity = entity
+            
+            // NSPredicate = SQL 'where' statement
+            let predicate = NSPredicate(format: "id==%@", noteId)
+            fetchNoteRequest.predicate = predicate
+
+            // save
             do {
-                try managedObjectContext.execute(batchUpdateRequest)
-                dismiss(animated: true, completion: nil)
+                let results = try managedObjectContext.fetch(fetchNoteRequest)
+                let note = results[0]
+                note.title = newTitle
+                note.content = newContent
+                
+                try managedObjectContext.save()
             } catch {
                 print("could not load data : \(error.localizedDescription)")
             }
@@ -88,12 +94,15 @@ class EditNoteViewController: UIViewController {
     private func updateUI() {
         
         if let noteId = noteId {
+            // setup context
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let managedObjectContext = appDelegate.persistentContainer.viewContext
             
+            // fetch notes where id == noteId
             let fetchNoteRequest: NSFetchRequest<Note> = Note.fetchRequest()
             fetchNoteRequest.predicate = NSPredicate(format: "id = %@", noteId)
             
+            // execute fetch
             do {
                 let fetchNoteResults = try managedObjectContext.fetch(fetchNoteRequest)
                 let note = fetchNoteResults[0]
