@@ -22,6 +22,7 @@ class NoteCell: UITableViewCell {
     private func updateUI() {
         titleLabel.text = dataSource?.title
         contentLabel.text = dataSource?.content
+        dump(dataSource?.toDictionary())
     }
     
     override func awakeFromNib() {
