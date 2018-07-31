@@ -14,6 +14,7 @@
 		92179A612000980100CCC523 /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92179A5F2000980100CCC523 /* NoteCell.xib */; };
 		921803C12000A56C009A4585 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921803C02000A56C009A4585 /* AddNoteViewController.swift */; };
 		9226E4CC200245DE00439408 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226E4CB200245DE00439408 /* Extensions.swift */; };
+		92858C732110662700BC6DF5 /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92858C722110662700BC6DF5 /* PersistentService.swift */; };
 		929A064C20008B6B004A1845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A064B20008B6B004A1845 /* AppDelegate.swift */; };
 		929A065120008B6B004A1845 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929A064F20008B6B004A1845 /* Main.storyboard */; };
 		929A065420008B6B004A1845 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 929A065220008B6B004A1845 /* Notes.xcdatamodeld */; };
@@ -51,6 +52,7 @@
 		92179A5F2000980100CCC523 /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
 		921803C02000A56C009A4585 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		9226E4CB200245DE00439408 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		92858C722110662700BC6DF5 /* PersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
 		929A064820008B6B004A1845 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		929A064B20008B6B004A1845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		929A065020008B6B004A1845 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			path = extension;
 			sourceTree = "<group>";
 		};
+		92858C712110660900BC6DF5 /* store */ = {
+			isa = PBXGroup;
+			children = (
+				92858C722110662700BC6DF5 /* PersistentService.swift */,
+			);
+			path = store;
+			sourceTree = "<group>";
+		};
 		929A063F20008B6B004A1845 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		929A064A20008B6B004A1845 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				92858C712110660900BC6DF5 /* store */,
 				9226E4CA200245C500439408 /* extension */,
 				92179A642000984100CCC523 /* model */,
 				92179A632000981E00CCC523 /* view */,
@@ -341,6 +352,7 @@
 				929A064C20008B6B004A1845 /* AppDelegate.swift in Sources */,
 				92C262D92002125600D00818 /* EditNoteViewController.swift in Sources */,
 				92B3BB3520084E76000DD1D3 /* Note+CoreDataProperties.swift in Sources */,
+				92858C732110662700BC6DF5 /* PersistentService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

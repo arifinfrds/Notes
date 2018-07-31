@@ -7,17 +7,13 @@
 //
 
 import UIKit
-import CoreData
 
 class NoteViewController: UIViewController {
     
     
-    // MARK: - Properties
+    //varRK: - Properties
     
     @IBOutlet var noteTableView: UITableView!
-    
-    var appDelegate: AppDelegate!
-    var managedObjectContext: NSManagedObjectContext!
     
     var notes = [Note]()
     
@@ -25,7 +21,7 @@ class NoteViewController: UIViewController {
     // MARK: - View life cycle
     
     override func viewWillAppear(_ animated: Bool) {
-        updateUI()
+        fetchNotes()
     }
     
     override func viewDidLoad() {
@@ -45,7 +41,7 @@ class NoteViewController: UIViewController {
         var experimentNotes = [Note]()
         experimentNotes.append(Note(id: "123123", title: "CoreDataTest", content: "CoreDataTest"))
     }
- 
+    
     
     // MARK: - Private API's
     
@@ -60,33 +56,24 @@ class NoteViewController: UIViewController {
     }
     
     // CoreData fetch request
-    private func updateUI() {
-        // core data stuff
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
-        managedObjectContext = appDelegate.persistentContainer.viewContext
-        
-        let noteRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        
-        do {
-            try notes = managedObjectContext.fetch(noteRequest)
+    private func fetchNotes() {
+        PersistentService.shared.fetchNotes { (notes, success) in
+            if !success {
+                return
+            }
+            guard let notes = notes else {
+                return
+            }
+            self.notes = notes
             noteTableView.reloadData()
-        } catch {
-            print("updateUI(): could not save data : \(error.localizedDescription)")
         }
     }
     
     // CoreData delete
     private func deleteNoteFromCoreData(at indexPath: IndexPath) {
-        // core data stuff
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
-        managedObjectContext = appDelegate.persistentContainer.viewContext
         let note = notes[indexPath.row]
-        managedObjectContext.delete(note)
-        
-        do {
-            try managedObjectContext.save()
-        } catch {
-            print("deleteNoteFromCoreData(): could not save data : \(error.localizedDescription)")
+        PersistentService.shared.deleteNoteFromCoreData(note: note) { success in
+            print(success.description)
         }
     }
     
