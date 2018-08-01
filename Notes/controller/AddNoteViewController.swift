@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class AddNoteViewController: UIViewController {
     
@@ -16,9 +15,6 @@ class AddNoteViewController: UIViewController {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextField: UITextField!
-    
-    var appDelegate: AppDelegate!
-    var managedObjectContext: NSManagedObjectContext!
     
     
     // MARK: - View life cycle
@@ -38,9 +34,6 @@ class AddNoteViewController: UIViewController {
     
     @IBAction func save(_ sender: Any) {
         
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedObjectContext = appDelegate.persistentContainer.viewContext
-        
         if (titleTextField.text?.isEmpty)! || (contentTextField.text?.isEmpty)! {
             showAlertController(with: "Field is empty", message: "Please check your input field.")
         }
@@ -48,19 +41,14 @@ class AddNoteViewController: UIViewController {
         // check input field
         guard let title = titleTextField.text else { return }
         guard let content = contentTextField.text else { return }
+        let id = RandomStringGenerator.getRandomString(length: 25)
         
-        let note = Note(context: managedObjectContext)
-        note.title = title
-        note.content = content
-        
-        note.id = randomString(length: 25)
-        
-        do {
-            try managedObjectContext.save()
-            dismiss(animated: true, completion: nil)
-        } catch {
-            showAlertController(with: "Error", message: "Could not save data.")
-            print("could not save data : \(error.localizedDescription)")
+        Repository.shared.requestSaveNote(withId: id, title: title, content: content) { success in
+            if success {
+                dismiss(animated: true, completion: nil)
+            } else {
+                showAlertController(with: "Error", message: "Could not save data.")
+            }
         }
     }
     
@@ -71,20 +59,5 @@ class AddNoteViewController: UIViewController {
         // setup navigation bar
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = Resources.Color().applicationBaseColor
-    }
-    
-    private func randomString(length: Int) -> String {
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-        
-        var randomString = ""
-        
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-        return randomString
-    }
-    
+    }    
 }

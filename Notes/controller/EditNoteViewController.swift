@@ -50,14 +50,16 @@ class EditNoteViewController: UIViewController {
     
     func updateNoteDatabase() {
         if let noteId = noteId {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let managedObjectContext = appDelegate.persistentContainer.viewContext
             
             guard
                 let newTitle = titleTextField.text,
                 let newContent = contentTextField.text else {
                     return
             }
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managedObjectContext = appDelegate.persistentContainer.viewContext
+            
             // request
             let fetchNoteRequest: NSFetchRequest<Note> = Note.fetchRequest()
             

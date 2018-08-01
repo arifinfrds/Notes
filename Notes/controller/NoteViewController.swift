@@ -57,7 +57,7 @@ class NoteViewController: UIViewController {
     
     // CoreData fetch request
     private func fetchNotes() {
-        PersistentService.shared.fetchNotes { (notes, success) in
+        Repository.shared.requestFetchNotes { (notes, success) in
             if !success {
                 return
             }
@@ -72,7 +72,7 @@ class NoteViewController: UIViewController {
     // CoreData delete
     private func deleteNoteFromCoreData(at indexPath: IndexPath) {
         let note = notes[indexPath.row]
-        PersistentService.shared.deleteNoteFromCoreData(note: note) { success in
+        Repository.shared.requestDeleteNoteFromCoreData(note: note) { success in
             print(success.description)
         }
     }
@@ -98,25 +98,25 @@ class NoteViewController: UIViewController {
 // MARK - UITableViewDataSource
 
 extension NoteViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "note_cell", for: indexPath) as! NoteCell
         cell.dataSource = notes[indexPath.row]
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
+
         if editingStyle == .delete {
             deleteNoteFromCoreData(at: indexPath)
             notes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        
+
     }
 }
 
@@ -124,18 +124,15 @@ extension NoteViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension NoteViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "segue_edit_note_view_controller", sender: indexPath)
     }
 }
-
-
-
 
 
 
